@@ -1,0 +1,1899 @@
+/* Reset and base styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-image: url('https://media-assets.swiggy.com/swiggy/image/upload/c_scale,w_715/portal/m/brand_logos/Swiggy_OG.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  background-attachment: fixed;
+}
+body h1 {
+color:rgba(146, 32, 57, 0.1);
+text-align: center;
+}
+
+a {
+  text-decoration: none;
+  color: #ff6600;
+}
+
+nav {
+  background-color: #fff;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav h2 {
+  margin: 0;
+  color: #ff6600;
+}
+
+nav a {
+  margin-left: 1rem;
+  font-weight: bold;
+}
+
+/* Grid layout for restaurant cards */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  padding: 2rem;
+}
+
+/* Restaurant card styling */
+.card {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 1rem;
+  color: white;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  width: 240px;
+}
+
+.card:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: scale(1.03);
+  cursor: pointer;
+}
+
+.card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.card h3 {
+  margin: 0.5rem;
+  color: #c7f18e;
+}
+
+.card p {
+  margin: 0.5rem;
+  color: #e2d9d9;
+}
+
+/* Cart styles */
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  background-color: #fff;
+  margin: 0.5rem 0;
+  padding: 1rem;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+button {
+  background-color: #ff6600;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #e65c00;
+}
+
+.home {
+  padding: 2rem;
+}
+
+.btna {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.5rem 1.2rem;
+  background-color: rgba(218, 201, 201, 0.25);
+  color: white;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.btna:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+  color: #222;
+  cursor: pointer;
+}
+
+.footer {
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  text-align: center;
+  padding: 1rem 0;
+  width: 100%;
+  font-size: 0.9rem;
+  backdrop-filter: blur(5px);
+  box-shadow: 0 -2px 8px rgba(0,0,0,0.3);
+  z-index: 1000;
+  margin-top: 2rem;
+}
+
+.footer-links {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footer-icon {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: #ebc0c0;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-icon:hover {
+  color: #007bff;
+}
+
+.footer-icon svg {
+  font-size: 18px;
+}
+
+/* Optional toast customization */
+.Toastify__toast {
+  background-color: #323232;
+  color: #fff;
+  font-size: 0.95rem;
+  border-radius: 8px;
+}
+
+.menu-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.menu-item {
+  flex: 1 1 220px;
+  max-width: 240px;
+}
+.menu-item-image {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.discounted-price {
+  color: green;
+  font-weight: bold;
+}
+
+.original-price {
+  text-decoration: line-through;
+  color: #999;
+  margin-left: 8px;
+}
+
+.you-save {
+  display: block;
+  color: #2e7d32;
+  font-size: 0.85rem;
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+
+
+/* Make the entire page take full height */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* App container that grows */
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(248, 90, 90, 0.5);
+  z-index: -1;
+}
+
+/* Updated Navbar Styles */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(6px);
+  padding: 1rem 2rem;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* Brand section */
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.navbar h2 {
+  margin: 0;
+  color: #ff6600;
+}
+
+/* Logo image */
+.logo {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.supersaver {
+  background-color: transparent;
+}
+
+.supersaver:hover {
+  background-color: transparent;
+}
+.supersaver:hover .logo {
+  transform: scale(1.05);
+  transition: transform 0.2s ease;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+}
+
+/* Navigation links container */
+.navbar-links {
+  display: flex;
+  list-style: none;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+/* Remove padding and background from <li> so clickable element controls it */
+.navbar-links li {
+  padding: 0;
+  margin: 0;
+  background: none;
+  border-radius: 6px;
+}
+
+/* Style the links and logout button uniformly */
+.navbar-links a,
+.navbar-links .logout-btn {
+  display: block;
+  padding: 0.5rem 1rem;
+  background-color: rgba(84, 243, 248, 0.6);
+  border-radius: 6px;
+  color: #ff6600;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  text-decoration: none;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Hover effect for all nav clickable items */
+.navbar-links a:hover,
+.navbar-links .logout-btn:hover {
+  background-color: rgba(255, 102, 0, 0.2);
+  color: #ff6600;
+}
+
+/* Reset button default styles */
+.logout-btn {
+  all: unset;
+  width: 100%;
+  display: block;
+}
+
+/* Optional span style to match other links */
+.logout-text {
+  color: inherit;
+}
+
+.navbar::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(213, 243, 104, 0.7);
+  z-index: -1;
+  backdrop-filter: blur(4px);
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 100vh;
+}
+
+.content {
+  flex: 1;
+  padding-top: 80px;
+  padding-bottom: 2rem;
+}
+
+/* Other styles below remain unchanged ... */
+/* Search container */
+.search-container {
+  position: relative;
+  width: 100%;
+  max-width: 480px;  /* a bit larger */
+  margin: 1rem 0;
+  padding-left: 8px;
+}
+
+/* Search icon inside input */
+.search-icon {
+  position: absolute;
+  top: 50%;
+  left: 26px; /* a bit more padding */
+  transform: translateY(-50%);
+  color: #bbb;
+  pointer-events: none;
+  font-size: 20px;
+  z-index: 1;
+}
+
+/* Search input */
+.search-bar {
+  width: 100%;
+  padding: 14px 16px 14px 44px; /* more padding for bigger size & icon */
+  font-size: 18px; /* larger font */
+  border: none;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.3); /* subtle transparent background */
+  color: #222;
+  backdrop-filter: blur(8px);
+  outline: none;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.1);
+  z-index: 1;
+}
+
+/* Placeholder styling */
+.search-bar::placeholder {
+  color: #888;
+}
+
+/* Hover & focus state */
+.search-bar:hover,
+.search-bar:focus {
+  background-color: rgba(255, 255, 255, 0.8); /* brighter background */
+  box-shadow: 0 0 8px rgba(255, 102, 0, 0.6); /* subtle orange glow */
+  color: #000;
+}
+
+.checkout-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(6px);
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.checkout-container h2 {
+  margin-bottom: 1.5rem;
+  color: #444431;
+  text-align: center;
+}
+
+.empty-cart-msg {
+  font-style: italic;
+  text-align: center;
+  color: #ccc;
+  margin-top: 2rem;
+}
+
+.checkout-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem 0;
+}
+
+.checkout-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  color: #fff;
+}
+
+.item-image-price {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.checkout-item-image {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  object-fit: cover;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.item-price {
+  font-weight: 700;
+  color: #ffe082;
+}
+
+.item-name {
+  flex: 1;
+  margin-left: 1rem;
+  font-weight: 600;
+  color: white;
+}
+
+.checkout-total {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #39e429;
+  text-align: right;
+  margin-bottom: 1.5rem;
+}
+
+.checkout-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.checkout-buttons button {
+  padding: 0.6rem 1.4rem;
+  border-radius: 8px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.checkout-buttons button:first-child {
+  background-color: #4caf50;
+  color: white;
+}
+
+.checkout-buttons button:first-child:hover {
+  background-color: #43a047;
+}
+
+.checkout-buttons button:last-child {
+  background-color: #e53935;
+  color: white;
+}
+
+.checkout-buttons button:last-child:hover {
+  background-color: #c62828;
+}
+.orders-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(6px);
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.orders-container h2 {
+  color: #2fd4be;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.empty-orders-msg {
+  font-style: italic;
+  text-align: center;
+  color: #ccc;
+  margin-top: 2rem;
+}
+
+.orders-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.order-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background-color: rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.order-item-image {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  object-fit: cover;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.order-item-details {
+  display: flex;
+  justify-content: space-between;
+  flex: 1;
+  font-weight: 600;
+  color: #ffe082;
+}
+
+.order-item-name {
+  color: white;
+}
+.order-item-price {
+  font-weight: 700;
+}
+
+.order-price-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.order-discounted-price {
+  color: #388e3c;
+  font-weight: bold;
+}
+
+.order-original-price {
+  text-decoration: line-through;
+  color: #888;
+  font-size: 0.9rem;
+}
+.order-saved {
+  color: #2e7d32;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.card {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 1rem;
+  color: white;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  width: 240px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+}
+
+.card:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: scale(1.03);
+}
+
+.card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+
+
+.card p {
+  margin: 0 0 1rem;
+  color: #ddd;
+  font-size: 0.9rem;
+}
+
+/* Button styled link */
+.btna {
+  display: inline-block;
+  padding: 0.5rem 1.2rem;
+  background-color: rgba(218, 201, 201, 0.25);
+  color: white;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.btna:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+  color: #222;
+  cursor: pointer;
+}
+.menu-item {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 1rem;
+  color: white;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  cursor: pointer;
+  max-width: 240px;
+}
+
+.menu-item:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  transform: scale(1.03);
+}
+
+.menu-item h4 {
+  margin: 0;
+  color: #ebcab4;
+  font-weight: 600;
+}
+
+.menu-item p {
+  margin: 0;
+  color: #ddd;
+  font-weight: 500;
+}
+
+.menu-item button {
+  background-color: #ff6600;
+  border: none;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+}
+/*------------------------register restaurant---------*/
+
+/* Container Styling */
+.login-container {
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+}
+
+/* Form Styling */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;     /* Center children horizontally */
+  gap: 20px;
+  max-width: 100rem;       /* Wider form container */
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.login-form input {
+  width: 130%;             /* Fill the parent container */
+  max-width: 60rem;        /* Controls the visible input length */
+  height: 40px;
+  padding: 5px 15px;
+  font-size: 16px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+
+
+.login-form h2 {
+  text-align: center;
+  font-size: 28px;
+  color: #333;
+}
+/* Container for buttons */
+.button-group {
+  display: flex;
+  gap: 100px;
+  width: 100%;
+  max-width: 60rem;         /* Same width as input fields */
+}
+
+.login-form button {
+  flex: 1;
+  height: 40px;
+  font-size: 16px;
+  white-space: nowrap;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+
+.login-form button:hover {
+  background-color: #555;
+}
+
+
+
+/* Input Groups */
+.input-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-group label {
+  font-weight: bold;
+  margin-bottom: 6px;
+  color: #444;
+}
+.input-group input,
+.input-group select {
+  background-color: transparent !important;
+  color: #333 !important;          /* Make input text dark for visibility */
+  border: 1px solid #ccc;
+  box-shadow: none !important;
+  padding: 12px 16px;
+  height: 25px;
+  border-radius: 6px;
+}
+
+.input-group input::placeholder,
+.input-group select::placeholder {
+  color: #999 !important;          /* Light gray placeholder */
+}
+
+/* For react-select, add: */
+
+.css-1dimb5e-singleValue {         /* Selected value */
+  color: #333 !important;
+}
+
+.css-1jqq78o-placeholder {          /* Placeholder */
+  color: #999 !important;
+}
+
+.css-13cymwt-control {              /* Control (input box) */
+  background-color: transparent !important;
+  border: 1px solid #ccc !important;
+  box-shadow: none !important;
+}
+
+
+/* For react-select single value text */
+.custom-select__single-value {
+  color: #fff !important;
+}
+
+/* Optional: On focus, maybe highlight the border */
+.input-group input:focus,
+.input-group select:focus,
+.custom-select__control--is-focused {
+  border-color: #f36a6a; /* or your accent color */
+  outline: none;
+  box-shadow: 0 0 5px #f36a6a;
+}
+
+
+/* React Select overrides */
+.css-13cymwt-control {
+  background-color: transparent !important;
+  border: 1px solid #ccc !important;
+  box-shadow: none !important;
+}
+.css-1dimb5e-singleValue {
+  color: #333 !important;
+}
+.css-1jqq78o-placeholder {
+  color: #999 !important;
+}
+/* Override react-select menu background */
+/* Fully transparent dropdown background */
+.css-1nmdiq5-menu {
+  background-color: transparent !important;
+  backdrop-filter: none !important; /* remove any blur */
+  box-shadow: none !important; /* remove shadow */
+  border: none !important; /* remove border */
+}
+
+/* Also remove background color of options inside */
+.css-1nmdiq5-menu-list {
+  background-color: transparent !important;
+}
+
+/* Optional: Make the dropdown options text color visible */
+.css-1nmdiq5-option {
+  background-color: transparent !important;
+  color: #fff; /* or any contrasting color based on your page */
+}
+
+/* Optional: Change option hover background to semi-transparent */
+.css-1nmdiq5-option--is-focused {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  color: #fff !important;
+}
+
+
+
+/* Menu Section */
+h3 {
+  margin-top: 20px;
+  font-size: 20px;
+  color: #444;
+}
+
+.menu-item-inputs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.menu-item-inputs input {
+  flex: 1;
+  min-width: 120px;
+  padding: 8px;
+}
+
+.menu-item-inputs button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.menu-item-inputs button:hover {
+  background-color: #218838;
+}
+
+/* Menu List */
+.menu-item-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  padding: 10px;
+  border-radius: 6px;
+}
+
+.menu-item-image {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.menu-item-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1;
+}
+
+.menu-item-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.item-name {
+  font-weight: bold;
+}
+
+.item-price {
+  color: #666;
+  font-size: 14px;
+}
+
+.remove-button {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 8px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.remove-button:hover {
+  background-color: #c82333;
+}
+
+/* Submit Button */
+.login-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.login-button:hover {
+  background-color: #0056b3;
+}
+
+
+.login-button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: rgba(112, 193, 179, 0.85);
+  color: #fff;
+  font-weight: 700;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 1rem;
+}
+
+.login-button:hover {
+  background-color: rgba(112, 193, 179, 1);
+}
+
+.menu-item-inputs input {
+  background: rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: #fff;
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+  min-width: 120px;
+}
+
+.menu-item-inputs input::placeholder {
+  color: #ddd;
+}
+
+.menu-item-inputs input:focus {
+  border-color: #70c1b3;
+  outline: none;
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.menu-item-inputs button {
+  background-color: rgba(40, 167, 69, 0.85);
+  border: none;
+  padding: 0 1.25rem;
+  color: white;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.menu-item-inputs button:hover {
+  background-color: rgba(40, 167, 69, 1);
+}
+
+/* Optional: make scrollbar invisible or minimal if needed */
+
+
+.menu-item button:hover {
+  background-color: #e65c00;
+}
+.menu-item-list {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 1.5rem;
+}
+
+.menu-item {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  display: grid;
+  overflow: hidden;
+}
+
+.menu-item-content {
+  display: flex;
+  align-items: flex-start;
+  padding: 1rem;
+  gap: 1rem;
+}
+
+.menu-item-image {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-right: 1rem;
+  flex-shrink: 0;
+}
+
+.menu-item-info {
+  display: flex;
+  justify-content: space-between;
+  flex-grow: 1;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.menu-item-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.item-name {
+  font-size: 1rem;
+  color: #333;
+  word-break: break-word;       /* Allow long words to wrap */
+  white-space: normal;          /* Allow multiple lines */
+  line-height: 1.4;
+}
+
+.item-price {
+  margin-top: 0.25rem;
+  color: #777;
+  font-size: 0.9rem;
+}
+
+.remove-button {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  height: 32px;                /* Fixed height */
+  align-self: flex-start;      /* Stays at top */
+  margin-left: 1rem;
+  white-space: nowrap;
+}
+.remove-button:hover {
+  background-color: #c0392b;
+}
+
+/* Optional: Responsive fix */
+@media (max-width: 480px) {
+  .menu-item-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .menu-item-info {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .remove-button {
+    margin-left: 0;
+    margin-top: 0.5rem;
+  }
+}
+
+.item-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.restaurant-name {
+  font-size: 0.85rem;
+  color: #ccc;
+  font-style: italic;
+}
+
+.order-restaurant-name {
+  font-size: 0.85rem;
+  color: #ccc;
+  font-style: italic;
+  margin-top: 4px;
+}
+
+------------------------
+/* === Restaurant Component Styles (Updated) === */
+
+.restaurant-container {
+  min-height: 100vh;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05); /* transparent white */
+  backdrop-filter: blur(6px);
+  color: #2c3e50;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  animation: fadeIn 0.4s ease-in;
+}
+
+.restaurant-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.restaurant-header h2 {
+  font-size: 2.5rem;
+  color: #b0cae4;
+  margin-bottom: 0.5rem;
+}
+
+.restaurant-header p {
+  font-size: 1.2rem;
+  color: #b5e2e6;
+}
+
+/* Center menu grid with max-width */
+.menu-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  width: 100%;
+  max-width: 900px;
+  justify-content: center;
+  margin: 0 auto; /* center the whole container */
+  /*padding: 0 1rem;*/
+}
+
+/* Menu Item Card */
+.menu-item {
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  padding: 1.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+  opacity: 1; /* ensure no transparency */
+  backdrop-filter: none; 
+}
+
+.menu-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+}
+
+.menu-item h3 {
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+  color: #2c3e50;
+}
+
+.menu-item p {
+  font-size: 1rem;
+  color: #7f8c8d;
+  margin-bottom: 0.5rem;
+}
+
+.menu-item button {
+  background-color: #27ae60;
+  color: #d35400;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.menu-item button:hover {
+  background-color: #219150;
+}
+
+/* Cart Link */
+.cart-link-container {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.cart-link {
+  display: inline-block;
+  background-color: #b85e11;
+  color: #774727;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 0.8rem 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(230, 126, 34, 0.3);
+  transition: background-color 0.3s ease;
+}
+
+.cart-link:hover {
+  background-color: #d35400;
+}
+
+/* Empty and Not Found */
+.empty-menu,
+.not-found {
+  color: #c0392b;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+/* Subtle Fade In */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.profile-tabs button {
+  margin-right: 10px;
+  padding: 8px 15px;
+  border: none;
+  background-color: #eee;
+  cursor: pointer;
+}
+
+.profile-tabs button.active {
+  background-color: #007bff;
+  color: white;
+}
+
+.profile-content {
+  margin-top: 20px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+.profile-page nav {
+
+  background-color: transparent;
+}
+/*-----------------------Slider css--------------------*/
+.slider {
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  height: 400px;
+  margin: 2rem auto;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(226, 143, 143, 0.3);
+}
+
+/* Slide wrapper */
+.slides-container {
+  display: flex;
+  transition: transform 0.6s ease-in-out;
+  height: 100%;
+}
+
+/* Each image */
+.slide {
+  min-width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: brightness(60%);
+  border-radius: 12px;
+}
+.caption {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  text-align: center;
+  font-size: 1.3rem;
+  line-height: 1.5;
+  font-weight: 500;
+  z-index: 2;
+  white-space: pre-line;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+/* Arrows */
+.left-arrow,
+.right-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  font-size: 2rem;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 8px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.left-arrow:hover,
+.right-arrow:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.left-arrow {
+  left: 16px;
+}
+
+.right-arrow {
+  right: 16px;
+}
+
+/* Dots */
+.dots {
+  position: absolute;
+  bottom: 15px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: 4;
+}
+
+.dot {
+  height: 12px;
+  width: 12px;
+  margin: 0 6px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  display: inline-block;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.active-dot {
+  background-color: white;
+}
+
+@media (max-width: 768px) {
+  .slider {
+    height: 250px;
+  }
+
+  .left-arrow,
+  .right-arrow {
+    font-size: 1.5rem;
+  }
+
+  .dot {
+    height: 10px;
+    width: 10px;
+  }
+}
+
+.signup-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.signup-form {
+  padding: 30px 40px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  box-sizing: border-box;
+}
+
+.signup-form h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+  text-align: center;
+}
+
+.signup-form input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+.signup-form button {
+  width: 100%;
+  padding: 12px;
+  background-color: #007bff;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.signup-form button:hover {
+  background-color: #0056b3;
+}
+
+.switch-auth {
+  margin-top: 15px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.switch-auth span {
+  color: #007bff;
+  cursor: pointer;
+  font-weight: 500;
+  text-decoration: underline;
+}
+/*----------------------------home-category--------------------*/
+.category-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1.5rem 0;
+  flex-wrap: wrap;
+}
+
+.category-buttons button {
+  padding: 0.5rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+}
+
+.category-buttons button.active {
+  color: white;
+  border-color: #007bff;
+}
+.no-category,
+.no-restaurants {
+  text-align: center;
+  margin-top: 2rem;
+  color: #666;
+}
+
+.category-group {
+  margin-bottom: 40px;
+}
+
+.category-group h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #333;
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 5px;
+}
+
+/*-----------chat-bot--------------------*/
+.chatbot {
+  width: 300px;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  z-index: 2;
+}
+
+.messages {
+  max-height: 300px;
+  overflow-y: auto;
+  margin-bottom: 10px;
+}
+
+.user {
+  text-align: right;
+  color: #1a73e8;
+}
+
+.assistant {
+  text-align: left;
+  color: #111;
+}
+
+.input-box {
+  display: flex;
+  gap: 5px;
+}
+/*--------------------------*/
+
+/*----------------------------managrrestaurant-------------------------------*/
+/* Container padding */
+.manage-container {
+  padding: 2rem;
+  font-family: Arial, sans-serif;
+}
+
+/* Title */
+.manage-container h1 {
+  margin-bottom: 1rem;
+}
+
+/* Restaurant list */
+.restaurant-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2rem 0;
+  background-color: transparent;
+}
+
+.restaurant-list li {
+  margin-bottom: 1rem;
+  padding: 0.6rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: transparent;
+}
+
+.restaurant-list strong {
+  font-size: 1.1rem;
+}
+
+.restaurant-list button {
+  margin-left: 0.5rem;
+  padding: 0.3rem 0.7rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.restaurant-list button:first-of-type {
+  background-color: #007bff;
+  color: white;
+}
+
+.restaurant-list button:last-of-type {
+  background-color: #dc3545;
+  color: white;
+}
+
+/* Edit form */
+.edit-form {
+  max-width: 600px;
+  border: 1px solid #ccc;
+  padding: 1.5rem;
+  border-radius: 8px;
+}
+
+.edit-form h2 {
+  margin-bottom: 1rem;
+}
+
+/* Form labels */
+.edit-form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  margin-top: 1rem;
+}
+
+/* Form inputs – transparent, taller, wider */
+.edit-form input[type="text"],
+.edit-form input[type="url"],
+.edit-form input[type="number"],
+.menu-item-inputs input[type="text"],
+.menu-item-inputs input[type="url"],
+.menu-item-inputs input[type="number"] {
+  background-color: transparent;
+  height: 50px;
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  box-sizing: border-box;
+  color: #333;
+}
+
+/* Placeholder styling */
+input::placeholder {
+  color: #999;
+}
+
+/* react-select override */
+.edit-form .react-select__control {
+  border-radius: 5px;
+  border-color: #ccc;
+  min-height: 38px;
+}
+
+/* Menu items section */
+.menu-item-inputs {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.menu-item-inputs button {
+  background-color: #28a745;
+  border: none;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  flex: 0 0 auto;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.menu-item-inputs button:hover {
+  background-color: #218838;
+}
+
+/* Menu item list */
+.menu-item-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 1rem;
+  background-color: none;
+}
+
+.menu-item-list li {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  padding: 0.5rem;
+  border-radius: 6px;
+  margin-bottom: 0.6rem;
+  background-color: transparent;
+}
+
+.menu-item-image {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 5px;
+  margin-right: 1rem;
+  flex-shrink: 0;
+}
+
+.menu-item-info {
+  flex-grow: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menu-item-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.item-name {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.item-price {
+  font-size: 0.9rem;
+  color: #666;
+  padding-left: 20px;
+}
+
+.remove-button {
+  background-color: #dc3545;
+  border: none;
+  color: white;
+  padding: 0.3rem 0.7rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.remove-button:hover {
+  background-color: #c82333;
+}
+
+/* Save/Cancel buttons */
+.edit-form button.save-btn {
+  background-color: #007bff;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 1rem;
+}
+
+.edit-form button.save-btn:hover {
+  background-color: #0056b3;
+}
+
+.edit-form button.cancel-btn {
+  background-color: #6c757d;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-left: 1rem;
+  margin-top: 1rem;
+}
+
+.edit-form button.cancel-btn:hover {
+  background-color: #5a6268;
+}
+
+/*--------------------------offerspage---------------------*/
+.offers-container {
+  padding: 20px;
+}
+
+.restaurant-offer-group {
+  margin-top: 30px;
+}
+
+.restaurant-offer-group h2 {
+  margin-bottom: 10px;
+  font-size: 1.4rem;
+}
+
+.restaurant-offer-menu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.offer-item-card {
+  border: 1px solid #ccc;
+  padding: 10px;
+  width: 180px;
+  border-radius: 8px;
+  transition: box-shadow 0.2s ease;
+}
+
+.offer-item-card:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.offer-item-card img {
+  width: 100%;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.offer-price {
+  color: green;
+  font-weight: bold;
+}
+
+.original-price {
+  text-decoration: line-through;
+  color: #888;
+  font-size: 0.9rem;
+  margin-left: 5px;
+}
+
+.save-tag {
+  font-size: 0.85rem;
+  color: #2e7d32;
+  margin-top: 5px;
+}
+
+.offer-card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 12px;
+  margin: 8px;
+  width: 200px;
+  text-align: center;
+}
+
+.offer-image {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.category-buttons button.active {
+  background: #333;
+  color: white;
+}
+
+.cart-button-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.center-cart-button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  padding: 14px 32px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
+}
+
+.center-cart-button:hover {
+  background-color: #218838;
+}
