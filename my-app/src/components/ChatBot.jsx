@@ -10,7 +10,7 @@ const ChatBot = () => {
   const [loading, setLoading] = useState(false);
 
   // ⚠️ WARNING: Do not expose real API keys in frontend for production use
-  const API_KEY = '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'; // 🔐 (Visible to users!)
+  const API_KEY = 'kA'; // 🔐 (Visible to users!)
 
   const sendMessage = async () => {
     if (!input.trim()) return;
