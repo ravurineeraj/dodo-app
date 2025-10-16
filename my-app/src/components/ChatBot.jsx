@@ -10,7 +10,7 @@ const ChatBot = () => {
   const [loading, setLoading] = useState(false);
 
   // ⚠️ WARNING: Do not expose real API keys in frontend for production use
-  const AKEY = ''; // 🔐 (Visible to users!)
+  const AY = ''; // 🔐 (Visible to users!)
 
   const sendMessage = async () => {
     if (!input.trim()) return;
@@ -29,7 +29,7 @@ const ChatBot = () => {
         },
         {
           headers: {
-            Authorization: `Bearer ${AKEY}`,
+            Authorization: `Bearer ${AY}`,
             'Content-Type': 'application/json',
           },
         }
