@@ -1,2 +1,0 @@
-# dodo-app
-application
