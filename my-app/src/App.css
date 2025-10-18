@@ -21,7 +21,6 @@ a {
 
 nav {
   background-color: #fff;
-  padding: 1rem 2rem;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   display: flex;
   justify-content: space-between;
@@ -80,6 +79,19 @@ nav a {
   margin: 0.5rem;
   color: #e2d9d9;
 }
+.btna.disabled {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+  pointer-events: none;
+  text-decoration: none;
+}
+
+.far-badge {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+}
+
 
 /* Cart styles */
 ul {
@@ -247,12 +259,13 @@ body::before {
 .navbar {
   position: fixed;
   top: 0;
+  padding-left: 15px;
+  padding-right: 15px;
   left: 0;
   width: 100%;
   z-index: 1000;
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(6px);
-  padding: 1rem 2rem;
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
@@ -332,6 +345,12 @@ body::before {
   background-color: rgba(255, 102, 0, 0.2);
   color: #ff6600;
 }
+.navbar-search {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  margin: 1rem auto;
+}
 
 /* Reset button default styles */
 .logout-btn {
@@ -374,24 +393,24 @@ body::before {
   width: 100%;
   max-width: 480px;  /* a bit larger */
   margin: 1rem 0;
-  padding-left: 8px;
 }
 
 /* Search icon inside input */
 .search-icon {
   position: absolute;
   top: 50%;
-  left: 26px; /* a bit more padding */
+  left: 16px;
   transform: translateY(-50%);
-  color: #bbb;
-  pointer-events: none;
-  font-size: 20px;
-  z-index: 1;
+  font-size: 18px;
+  color: #888;
+  pointer-events: none; /* allows clicking through */
+  z-index: 2;
 }
 
 /* Search input */
 .search-bar {
   width: 100%;
+  max-width: 250px;
   padding: 14px 16px 14px 44px; /* more padding for bigger size & icon */
   font-size: 18px; /* larger font */
   border: none;
@@ -402,7 +421,6 @@ body::before {
   outline: none;
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
   box-shadow: inset 0 0 5px rgba(0,0,0,0.1);
-  z-index: 1;
 }
 
 /* Placeholder styling */
@@ -1287,7 +1305,9 @@ h3 {
     transform: translateY(0);
   }
 }
-
+.profile-tabs{
+  padding: 15px;
+}
 .profile-tabs button {
   margin-right: 10px;
   padding: 8px 15px;

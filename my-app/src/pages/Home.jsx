@@ -11,12 +11,29 @@ export default function Home({
   setSearch,
   setSelectedCategory,
 }) {
-  const [allRestaurants, setAllRestaurants] = useState([]);
+  const [rawRestaurants, setRawRestaurants] = useState([]);
+  const [userLocation, setUserLocation] = useState(null);
 
   const name = userEmail ? userEmail.split('@')[0] : '';
   const capitalize = (s) =>
     s && typeof s === 'string' ? s.charAt(0).toUpperCase() + s.slice(1) : '';
 
+  // 🧭 Distance helper
+  function getDistanceInKm(lat1, lon1, lat2, lon2) {
+    const R = 6371;
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(lat1 * Math.PI / 180) *
+        Math.cos(lat2 * Math.PI / 180) *
+        Math.sin(dLon / 2) *
+        Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c;
+  }
+
+  // 📦 Load static + localStorage restaurants once
   useEffect(() => {
     let registeredRestaurants = [];
     try {
@@ -26,11 +43,52 @@ export default function Home({
       console.error('Failed to parse restaurants from localStorage:', error);
     }
 
-    const combinedRestaurants = [...staticRestaurants, ...registeredRestaurants];
-    setAllRestaurants(combinedRestaurants);
+    const combined = [...staticRestaurants, ...registeredRestaurants];
+    setRawRestaurants(combined);
   }, []);
 
-  // 🔍 Grouped restaurants by category + search filter for "All Categories"
+  // 📍 Get user location once
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setUserLocation({
+          lat: position.coords.latitude,
+          lon: position.coords.longitude,
+        });
+      },
+      (error) => {
+        console.warn('Geolocation error:', error);
+        setUserLocation(null); // fallback: all far
+      }
+    );
+  }, []);
+
+  // 🧠 Compute isFar using memo
+  const allRestaurants = useMemo(() => {
+    if (!rawRestaurants.length) return [];
+
+    const THRESHOLD_KM = 5;
+
+    return rawRestaurants.map((r) => {
+      if (!userLocation || !r.lat || !r.long) {
+        return { ...r, isFar: true };
+      }
+
+      const distance = getDistanceInKm(
+        userLocation.lat,
+        userLocation.lon,
+        r.lat,
+        r.long
+      );
+
+      return {
+        ...r,
+        isFar: distance > THRESHOLD_KM,
+      };
+    });
+  }, [rawRestaurants, userLocation]);
+
+  // 🔍 Grouped restaurants (All Categories)
   const groupedRestaurants = useMemo(() => {
     if (selectedCategory !== 'All') return {};
 
@@ -40,12 +98,13 @@ export default function Home({
       const nameMatch = restaurant.name
         .toLowerCase()
         .includes(search.toLowerCase());
-
       const menuMatch = restaurant.menu?.some((item) =>
         item?.name?.toLowerCase().includes(search.toLowerCase())
       );
+      const matchesSearch = nameMatch || menuMatch;
 
-      if (!nameMatch && !menuMatch) return;
+      if (!search && restaurant.isFar) return;
+      if (!matchesSearch) return;
 
       const category = restaurant.category?.trim() || 'Other';
       if (!grouped[category]) grouped[category] = [];
@@ -55,7 +114,7 @@ export default function Home({
     return grouped;
   }, [allRestaurants, selectedCategory, search]);
 
-  // 🎯 Filtered restaurants when a specific category is selected
+  // 🎯 Filtered by selected category
   const filteredRestaurants = useMemo(() => {
     if (!selectedCategory || selectedCategory === 'All') return [];
 
@@ -68,7 +127,11 @@ export default function Home({
         const menuMatch = r.menu?.some((item) =>
           item?.name?.toLowerCase().includes(search.toLowerCase())
         );
-        return nameMatch || menuMatch;
+        const matchesSearch = nameMatch || menuMatch;
+
+        if (!search) return matchesSearch && !r.isFar;
+
+        return matchesSearch;
       });
   }, [allRestaurants, search, selectedCategory]);
 

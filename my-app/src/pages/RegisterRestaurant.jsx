@@ -19,6 +19,9 @@ export default function RegisterRestaurant() {
     image: '',
     deliveryTime: '',
     price: '',
+    location: '',
+    lat: '',
+    long: '',
     menu: []
   });
 
@@ -94,6 +97,11 @@ export default function RegisterRestaurant() {
       return;
     }
 
+    if (!formData.lat || !formData.long) {
+      alert('Please provide latitude and longitude for location tracking.');
+      return;
+    }
+
     const existingRestaurants = JSON.parse(localStorage.getItem('restaurants')) || [];
 
     const newRestaurant = {
@@ -101,6 +109,8 @@ export default function RegisterRestaurant() {
       ...formData,
       deliveryTime: Number(formData.deliveryTime),
       price: Number(formData.price),
+      lat: parseFloat(formData.lat),
+      long: parseFloat(formData.long),
     };
 
     localStorage.setItem('restaurants', JSON.stringify([...existingRestaurants, newRestaurant]));
@@ -197,6 +207,43 @@ export default function RegisterRestaurant() {
           />
         </div>
 
+        <div className="input-group">
+          <label htmlFor="location">Location Name</label>
+          <input
+            type="text"
+            name="location"
+            value={formData.location}
+            onChange={handleChange}
+            placeholder="e.g. Mumbai, Andheri"
+          />
+        </div>
+
+        <div className="input-group">
+          <label htmlFor="lat">Latitude</label>
+          <input
+            type="number"
+            name="lat"
+            step="any"
+            value={formData.lat}
+            onChange={handleChange}
+            placeholder="e.g. 19.076"
+            required
+          />
+        </div>
+
+        <div className="input-group">
+          <label htmlFor="long">Longitude</label>
+          <input
+            type="number"
+            name="long"
+            step="any"
+            value={formData.long}
+            onChange={handleChange}
+            placeholder="e.g. 72.8777"
+            required
+          />
+        </div>
+
         {/* Menu Items Section */}
         <h3>Menu Items</h3>
 
@@ -218,7 +265,7 @@ export default function RegisterRestaurant() {
           <input
             type="number"
             name="offerPrice"
-            placeholder="offer Price"
+            placeholder="Offer Price"
             value={menuItem.offerPrice}
             onChange={handleMenuChange}
           />
@@ -244,8 +291,8 @@ export default function RegisterRestaurant() {
                   <div className="menu-item-text">
                     <strong className="item-name">{item.name}</strong>
                     <p className="item-price">₹{item.price}</p>
-                    {item.OfferPrice !== null && item.OfferPrice !== '' && (
-                      <p className="item-offer-price">Offer Price: ₹{item.OfferPrice}</p>
+                    {item.offerPrice !== null && item.offerPrice !== '' && (
+                      <p className="item-offer-price">Offer Price: ₹{item.offerPrice}</p>
                     )}
                   </div>
                   <button

@@ -216,6 +216,41 @@ export default function ManageRestaurants() {
             Address:
             <input type="text" name="address" value={formData.address} onChange={handleChange} />
           </label>
+          <label>
+  Location:
+  <input
+    type="text"
+    name="location"
+    value={formData.location || ''}
+    onChange={handleChange}
+    placeholder="e.g. Mumbai, Andheri"
+  />
+</label>
+
+<label>
+  Latitude:
+  <input
+    type="number"
+    step="any"
+    name="lat"
+    value={formData.lat || ''}
+    onChange={handleChange}
+    placeholder="e.g. 19.076"
+  />
+</label>
+
+<label>
+  Longitude:
+  <input
+    type="number"
+    step="any"
+    name="long"
+    value={formData.long || ''}
+    onChange={handleChange}
+    placeholder="e.g. 72.8777"
+  />
+</label>
+
 
           <label>
             Image URL:

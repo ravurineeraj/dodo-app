@@ -154,7 +154,7 @@ function App() {
               path="/restaurant/:id"
               element={
                 <PrivateRoute isAuthenticated={isAuthenticated}>
-                  <Restaurant addToCart={handleAddToCart} cartItems={cartItems} />
+                  <Restaurant addToCart={handleAddToCart} cartItems={cartItems} search={search} />
                 </PrivateRoute>
               }
             />
