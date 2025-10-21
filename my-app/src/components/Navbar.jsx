@@ -5,7 +5,7 @@ import { FaMapMarkerAlt } from 'react-icons/fa';
 
 export default function Navbar({ search, setSearch, selectedCategory }) {
   const [location, setLocation] = useState('Fetching location...');
-  const [coordinates, setCoordinates] = useState({ lat: '', lng: '' });
+  const [ , setCoordinates] = useState({ lat: '', lng: '' });
 
   // 🚀 Get current GPS location and update state/localStorage
   const setCurrentLocation = () => {
