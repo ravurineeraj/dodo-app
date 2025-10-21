@@ -305,6 +305,40 @@ body::before {
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
 }
 
+.navbar-location {
+  margin: 0 1rem;
+}
+
+.location-input {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  background-color: transparent;
+  flex: 1;
+  max-width: 100px;
+}
+.navbar-location {
+  display: flex;
+  align-items: center;
+  margin: 10px 20px;
+  flex-grow: 1;
+  max-width: 300px;
+}
+
+.navbar-location svg {
+  cursor: pointer;
+  margin-left: 8px;
+  color: #ff5722;
+  font-size: 1.5rem;
+  transition: transform 0.2s ease;
+}
+
+.navbar-location svg:hover {
+  transform: scale(1.2);
+}
+
+
 /* Navigation links container */
 .navbar-links {
   display: flex;

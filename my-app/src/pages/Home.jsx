@@ -18,150 +18,114 @@ export default function Home({
   const capitalize = (s) =>
     s && typeof s === 'string' ? s.charAt(0).toUpperCase() + s.slice(1) : '';
 
-  // 🧭 Distance helper
-  function getDistanceInKm(lat1, lon1, lat2, lon2) {
+  const activeCategory = selectedCategory || 'All';
+
+  // 📦 Load static + saved restaurants
+  useEffect(() => {
+    const registered = JSON.parse(localStorage.getItem('restaurants') || '[]');
+    setRawRestaurants([...staticRestaurants, ...registered]);
+  }, []);
+
+  // 📍 Load coordinates from localStorage
+  useEffect(() => {
+    const updateLocation = () => {
+      const lat = parseFloat(localStorage.getItem('userLat'));
+      const lng = parseFloat(localStorage.getItem('userLng'));
+      if (lat && lng) {
+        setUserLocation({ lat, lon: lng });
+      } else {
+        setUserLocation(null);
+      }
+    };
+
+    updateLocation();
+
+    window.addEventListener('locationChanged', updateLocation);
+    window.addEventListener('storage', (e) => {
+      if (e.key === 'userLat' || e.key === 'userLng') updateLocation();
+    });
+
+    return () => {
+      window.removeEventListener('locationChanged', updateLocation);
+      window.removeEventListener('storage', updateLocation);
+    };
+  }, []);
+
+  // 🧭 Distance calc
+  const getDistanceInKm = (lat1, lon1, lat2, lon2) => {
     const R = 6371;
-    const dLat = (lat2 - lat1) * Math.PI / 180;
-    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const dLat = ((lat2 - lat1) * Math.PI) / 180;
+    const dLon = ((lon2 - lon1) * Math.PI) / 180;
     const a =
-      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-      Math.cos(lat1 * Math.PI / 180) *
-        Math.cos(lat2 * Math.PI / 180) *
-        Math.sin(dLon / 2) *
-        Math.sin(dLon / 2);
+      Math.sin(dLat / 2) ** 2 +
+      Math.cos((lat1 * Math.PI) / 180) *
+        Math.cos((lat2 * Math.PI) / 180) *
+        Math.sin(dLon / 2) ** 2;
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     return R * c;
-  }
+  };
 
-  // 📦 Load static + localStorage restaurants once
-  useEffect(() => {
-    let registeredRestaurants = [];
-    try {
-      registeredRestaurants =
-        JSON.parse(localStorage.getItem('restaurants')) || [];
-    } catch (error) {
-      console.error('Failed to parse restaurants from localStorage:', error);
-    }
-
-    const combined = [...staticRestaurants, ...registeredRestaurants];
-    setRawRestaurants(combined);
-  }, []);
-
-  // 📍 Get user location once
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        setUserLocation({
-          lat: position.coords.latitude,
-          lon: position.coords.longitude,
-        });
-      },
-      (error) => {
-        console.warn('Geolocation error:', error);
-        setUserLocation(null); // fallback: all far
-      }
-    );
-  }, []);
-
-  // 🧠 Compute isFar using memo
   const allRestaurants = useMemo(() => {
-    if (!rawRestaurants.length) return [];
-
     const THRESHOLD_KM = 5;
-
     return rawRestaurants.map((r) => {
-      if (!userLocation || !r.lat || !r.long) {
-        return { ...r, isFar: true };
-      }
-
-      const distance = getDistanceInKm(
-        userLocation.lat,
-        userLocation.lon,
-        r.lat,
-        r.long
-      );
-
-      return {
-        ...r,
-        isFar: distance > THRESHOLD_KM,
-      };
+      if (!userLocation || !r.lat || !r.long) return { ...r, isFar: true };
+      const distance = getDistanceInKm(userLocation.lat, userLocation.lon, r.lat, r.long);
+      return { ...r, isFar: distance > THRESHOLD_KM };
     });
   }, [rawRestaurants, userLocation]);
 
-  // 🔍 Grouped restaurants (All Categories)
+  // 🍱 Grouped for All Categories
   const groupedRestaurants = useMemo(() => {
-    if (selectedCategory !== 'All') return {};
+    if (activeCategory !== 'All') return {};
 
     const grouped = {};
 
-    allRestaurants.forEach((restaurant) => {
-      const nameMatch = restaurant.name
-        .toLowerCase()
-        .includes(search.toLowerCase());
-      const menuMatch = restaurant.menu?.some((item) =>
+    allRestaurants.forEach((r) => {
+      const nameMatch = r.name.toLowerCase().includes(search.toLowerCase());
+      const menuMatch = r.menu?.some((item) =>
         item?.name?.toLowerCase().includes(search.toLowerCase())
       );
       const matchesSearch = nameMatch || menuMatch;
 
-      if (!search && restaurant.isFar) return;
+      if (!search && r.isFar) return;
       if (!matchesSearch) return;
 
-      const category = restaurant.category?.trim() || 'Other';
+      const category = r.category?.trim() || 'Other';
       if (!grouped[category]) grouped[category] = [];
-      grouped[category].push(restaurant);
+      grouped[category].push(r);
     });
 
     return grouped;
-  }, [allRestaurants, selectedCategory, search]);
+  }, [allRestaurants, search, activeCategory]);
 
-  // 🎯 Filtered by selected category
+  // 🔍 Filtered for a Specific Category
   const filteredRestaurants = useMemo(() => {
-    if (!selectedCategory || selectedCategory === 'All') return [];
+    if (activeCategory === 'All') return [];
 
     return allRestaurants
-      .filter((r) => r.category === selectedCategory)
+      .filter((r) => r.category === activeCategory)
       .filter((r) => {
-        const nameMatch = r.name
-          .toLowerCase()
-          .includes(search.toLowerCase());
+        const nameMatch = r.name.toLowerCase().includes(search.toLowerCase());
         const menuMatch = r.menu?.some((item) =>
           item?.name?.toLowerCase().includes(search.toLowerCase())
         );
         const matchesSearch = nameMatch || menuMatch;
-
-        if (!search) return matchesSearch && !r.isFar;
-
-        return matchesSearch;
+        return search ? matchesSearch : matchesSearch && !r.isFar;
       });
-  }, [allRestaurants, search, selectedCategory]);
+  }, [allRestaurants, search, activeCategory]);
 
   return (
     <main className="body">
-      {/* 🔝 Category Buttons */}
-      <div
-        className="category-buttons"
-        role="tablist"
-        aria-label="Restaurant Categories"
-      >
-        <button
-          onClick={() => {
-            setSelectedCategory('');
-            setSearch('');
-          }}
-          className={selectedCategory === '' ? 'active' : ''}
-          role="tab"
-          aria-selected={selectedCategory === ''}
-        >
-          No Category
-        </button>
+      {/* Categories */}
+      <div className="category-buttons" role="tablist">
         <button
           onClick={() => {
             setSelectedCategory('All');
             setSearch('');
           }}
-          className={selectedCategory === 'All' ? 'active' : ''}
+          className={activeCategory === 'All' ? 'active' : ''}
           role="tab"
-          aria-selected={selectedCategory === 'All'}
+          aria-selected={activeCategory === 'All'}
         >
           All Categories
         </button>
@@ -173,9 +137,9 @@ export default function Home({
                 setSelectedCategory(cat);
                 setSearch('');
               }}
-              className={selectedCategory === cat ? 'active' : ''}
-              aria-selected={selectedCategory === cat}
+              className={activeCategory === cat ? 'active' : ''}
               role="tab"
+              aria-selected={activeCategory === cat}
             >
               {cat}
             </button>
@@ -183,30 +147,22 @@ export default function Home({
         )}
       </div>
 
-      {/* 👋 Greeting */}
       <div>
         {name ? <h1>Hello {capitalize(name)}!</h1> : <h1>Welcome!</h1>}
       </div>
 
       <ChatBot />
 
-      {/* 📢 Banner Slider for "No Category" */}
-      {selectedCategory === '' && (
+      {/* 📢 Show Banner */}
+      {activeCategory === 'All' && (
         <>
           <h1>Shops Near You</h1>
           <BannerSlider />
         </>
       )}
 
-      {/* 📌 Message for No Category */}
-      {selectedCategory === '' && (
-        <div className="no-category" role="alert" aria-live="polite">
-          <p>Please select a category to view items.</p>
-        </div>
-      )}
-
-      {/* 📌 Grouped View for "All Categories" */}
-      {selectedCategory === 'All' &&
+      {/* Render All */}
+      {activeCategory === 'All' &&
         Object.entries(groupedRestaurants).map(([category, restaurants]) => (
           <div key={category} className="category-group">
             <h2>{category}</h2>
@@ -218,28 +174,25 @@ export default function Home({
           </div>
         ))}
 
-      {/* ❗ No Matches in "All Categories" */}
-      {selectedCategory === 'All' &&
+      {activeCategory === 'All' &&
         Object.keys(groupedRestaurants).length === 0 && (
           <div className="no-restaurants" role="alert" aria-live="polite">
             <p>No results found across all categories for "{search}".</p>
           </div>
         )}
 
-      {/* 🔍 Filtered View for a Specific Category */}
-      {selectedCategory &&
-        selectedCategory !== 'All' &&
+      {/* Render Filtered */}
+      {activeCategory !== 'All' &&
         filteredRestaurants.length === 0 && (
           <div className="no-restaurants" role="alert" aria-live="polite">
             <p>
-              No items found in "{selectedCategory}"
+              No items found in "{activeCategory}"
               {search && ` matching "${search}"`}.
             </p>
           </div>
         )}
 
-      {selectedCategory &&
-        selectedCategory !== 'All' &&
+      {activeCategory !== 'All' &&
         filteredRestaurants.length > 0 && (
           <div className="grid">
             {filteredRestaurants.map((r) => (
