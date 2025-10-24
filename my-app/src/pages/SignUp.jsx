@@ -11,8 +11,10 @@ export default function SignUp() {
     e.preventDefault();
 
     if (name && email && password) {
-      // Simulate saving to localStorage (for demo purposes)
+      // Save user credentials to localStorage (demo purpose only!)
       localStorage.setItem('userEmail', email);
+      localStorage.setItem('userPassword', password);
+
       alert('Sign up successful! Please login.');
       navigate('/login');
     } else {

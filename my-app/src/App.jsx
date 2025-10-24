@@ -79,9 +79,14 @@ function App() {
     setIsAuthenticated(false);
     setUserEmail('');
     localStorage.removeItem('isAuthenticated');
-    localStorage.removeItem('userEmail');
+    //localStorage.removeItem('userEmail');
+    //localStorage.removeItem('userPassword');
     localStorage.removeItem('orders');
     localStorage.removeItem('cart');
+    localStorage.removeItem('userLat');
+    localStorage.removeItem('offers');
+    localStorage.removeItem('userLng');
+    localStorage.removeItem('userLocation');
     toast.info('Logged out');
     navigate('/login');
   };
